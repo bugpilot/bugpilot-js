@@ -1,5 +1,6 @@
 {
   "name": "@bugpilot/next",
+  "private": false,
   "version": "0.0.1",
   "description": "Bugpilot bindings for Next.js",
   "main": "index.mjs",
