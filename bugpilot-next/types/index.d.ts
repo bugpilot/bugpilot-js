@@ -6,19 +6,13 @@ import {
 } from "./imported_types";
 
 declare namespace bugpilot {
-  interface Metadata extends MetadataBase {
-    triggerType?: "sdk" | "autopilot" | "wss" | "helpdesk" | "widget" | string;
-    triggerSource?: string;
-    userProvidedDescription?: string;
-    [key: string]: any;
-  }
-
+  interface Metadata extends MetadataBase {}
   interface ReportData extends ReportDataBase {}
   interface User extends UserBase {}
 
   interface BugpilotProviderProps {
     workspaceId: string;
-    user?: User;
+    user?: Partial<User> | null;
     enabled?: boolean;
   }
 
@@ -26,8 +20,8 @@ declare namespace bugpilot {
 
   export const useBugpilot: () => {
     saveBugReport: (
-      metadata?: Metadata,
-      reportDataOverride?: ReportData
+      metadata?: Partial<Metadata>,
+      reportDataOverride?: Partial<ReportData>
     ) => void;
     identify: (user: User) => void;
     logout: () => void;

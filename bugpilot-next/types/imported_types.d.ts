@@ -1,5 +1,5 @@
 export type Metadata = {
-  triggerType: "wss" | "widget" | "sdk" | "autopilot";
+  triggerType: "sdk" | "autopilot" | "wss" | "helpdesk" | "widget" | string;
   triggerSource: never;
   userProvidedDescription: string;
   errorInfo: {
@@ -14,7 +14,7 @@ export type Metadata = {
 
 export type WorkspaceSettings = {
   id: string;
-  flags: Flags;
+  flags: never;
   overQuota: boolean;
   sampleRecordingAllUrls?: [];
   sampleRecordingPercentage: number;
