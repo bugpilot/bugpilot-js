@@ -19,6 +19,7 @@ declare namespace bugpilot {
   interface BugpilotProviderProps {
     workspaceId: string;
     user?: User;
+    enabled?: boolean;
   }
 
   export const Bugpilot: Context<BugpilotProviderProps>;
