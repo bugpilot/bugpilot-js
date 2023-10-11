@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import {
   Metadata as MetadataBase,
   ReportData as ReportDataBase,
@@ -15,7 +15,7 @@ interface BugpilotProviderProps {
   enabled?: boolean;
 }
 
-export const Bugpilot: FC<BugpilotProviderProps>;
+export const Bugpilot: FC<PropsWithChildren<BugpilotProviderProps>>;
 
 export const useBugpilot: () => {
   saveBugReport: (
