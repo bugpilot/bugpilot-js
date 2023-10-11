@@ -1,0 +1,9 @@
+{
+  "name": "bugpilot-js-libraries",
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "prettier": "^3.0.3"
+  }
+}
