@@ -1,4 +1,4 @@
-import React, { Context, FC } from "react";
+import React, { FC } from "react";
 import {
   Metadata as MetadataBase,
   ReportData as ReportDataBase,
