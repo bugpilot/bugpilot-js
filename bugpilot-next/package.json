@@ -28,7 +28,8 @@
   },
   "files": [
     "index.mjs",
-    "src/**/*"
+    "src/**/*",
+    "types/**/*"
   ],
   "types": "./types/index.d.ts"
 }
