@@ -1,7 +1,14 @@
 "use client";
 
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import logger from "./logger.mjs";
+import { waitUntilBugpilotAvailable } from "./utils.mjs";
 
 import packageJson from "../package.json";
 
@@ -18,7 +25,7 @@ const makeScriptUrl = (workspaceId) => {
 
 const BugpilotContext = createContext({
   saveBugReport: () => {},
-  identify: (user) => {},
+  identify: (nextUser) => {},
   logout: () => {},
 });
 
@@ -83,35 +90,31 @@ export const Bugpilot = ({
         return;
       }
 
-      if (!window.Bugpilot) {
-        return;
-      }
-
-      window.Bugpilot.saveReport(metadata, reportDataOverride);
+      waitUntilBugpilotAvailable(() => {
+        window.Bugpilot.saveReport(metadata, reportDataOverride);
+      });
     },
     []
   );
 
-  const identify = useCallback(() => {
+  const identify = useCallback((nextUser) => {
     if (typeof window === "undefined") {
       return;
     }
 
-    if (!window.Bugpilot) {
+    if (!nextUser) {
       return;
     }
 
-    if (!user) {
-      return;
-    }
-
-    if (!user?.id) {
+    if (!nextUser?.id || !nextUser?.email) {
       logger.warn(
-        "When passing user={} to <Bugpilot />: either provide an object with at least an id property or remove the user prop."
+        "Identify was called without id and email. Please provide both id and email for optimal results."
       );
     }
 
-    window.Bugpilot.identify(user);
+    waitUntilBugpilotAvailable(() => {
+      window.Bugpilot.identify(nextUser);
+    });
   }, []);
 
   const logout = useCallback(() => {
@@ -119,11 +122,9 @@ export const Bugpilot = ({
       return;
     }
 
-    if (!window.Bugpilot) {
-      return;
-    }
-
-    window.Bugpilot.lougout();
+    waitUntilBugpilotAvailable(() => {
+      window.Bugpilot.lougout();
+    });
   }, []);
 
   useEffect(() => {
