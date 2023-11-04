@@ -10,7 +10,7 @@ import React, {
 import logger from "./logger.mjs";
 import { waitUntilBugpilotAvailable } from "./utils.mjs";
 
-import packageJson from "../package.json";
+import packageJson from "../package.json" assert { type: "json" };
 
 const BUGPILOT_HOST = "https://script.bugpilot.io";
 const BUGPILOT_SCRIPT_FILENAME = "adopto.js";
